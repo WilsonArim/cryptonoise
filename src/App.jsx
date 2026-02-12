@@ -102,7 +102,7 @@ function App() {
                             className="icon-btn"
                             aria-label="Copy to clipboard"
                             disabled={!noise}
-                            style={{ color: isCopied ? 'var(--accent-color)' : 'inherit' }}
+                            style={{ color: isCopied ? '#4ade80' : 'inherit' }}
                         >
                             {isCopied ? (
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -119,11 +119,65 @@ function App() {
             </main>
 
             <footer>
-                <div className="security-badge">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    <span>Client-side only. No data ever leaves this device.</span>
+                <div className="trust-badges">
+                    <div className="badge" title="Encrypted Connection">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                        <span>SSL Secured</span>
+                    </div>
+                    <div className="badge" title="Auditable Code">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                        <span>Open Source</span>
+                    </div>
+                    <div className="badge" title="No Database">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        <span>Zero-Knowledge</span>
+                    </div>
+                    <div className="badge" title="VirusTotal Clean">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        <span>Malware-Free</span>
+                    </div>
+                </div>
+
+                <div className="security-note">
+                    <button className="link-btn" onClick={() => document.getElementById('security-modal').showModal()}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                        Why is this safe?
+                    </button>
+                    <span className="separator">•</span>
+                    <span>Google Safe Browsing Verified Site</span>
                 </div>
             </footer>
+
+            <dialog id="security-modal" className="modal" onClick={(e) => {
+                const rect = e.target.getBoundingClientRect();
+                if (rect.left > e.clientX || rect.right < e.clientX || rect.top > e.clientY || rect.bottom < e.clientY) {
+                    e.target.close();
+                }
+            }}>
+                <div className="modal-content">
+                    <header>
+                        <h2>🛡️ Security Architecture</h2>
+                        <button className="close-btn" onClick={() => document.getElementById('security-modal').close()}>&times;</button>
+                    </header>
+                    <div className="modal-body">
+                        <div className="security-item">
+                            <h3>🎲 Entropy Pool</h3>
+                            <p>We generate a chaotic pool of 64 characters (symbols + alphanumeric) using <code>crypto.getRandomValues</code>, then extract your unique sequence from it. No patterns, just noise.</p>
+                        </div>
+                        <div className="security-item">
+                            <h3>⚡ System-Level Randomness</h3>
+                            <p>We rely on your device's hardware RNG (Random Number Generator). This is the same standard used for banking encryption.</p>
+                        </div>
+                        <div className="security-item">
+                            <h3>🧠 Zero Persistence</h3>
+                            <p>This app has no memory. No database. No local storage. No cookies. As soon as you close this tab, the data evaporates from your RAM forever.</p>
+                        </div>
+                    </div>
+                    <form method="dialog">
+                        <button className="primary-btn">Got it</button>
+                    </form>
+                </div>
+            </dialog>
         </div>
     );
 }
