@@ -1,0 +1,235 @@
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #121212;
+  --bg-tertiary: #1e1e1e;
+
+  --text-primary: #e0e0e0;
+  --text-secondary: #a0a0a0;
+
+  --accent-color: #00f2ff;
+  /* Cyan Neon */
+  --accent-glow: rgba(0, 242, 255, 0.4);
+  --accent-dim: rgba(0, 242, 255, 0.1);
+
+  --border-color: #333;
+
+  --font-base: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --transition-speed: 0.2s;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--bg-primary);
+  background-image: url('/malinois-bg.png');
+  background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  color: var(--text-primary);
+  font-family: var(--font-base);
+  min-height: 100vh;
+  min-height: 100dvh;
+  /* Allow scattering but keep it neat */
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(10, 10, 10, 0.85);
+  /* Deep dark overlay for readability */
+  z-index: 0;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  /* Ensure content is above overlay */
+}
+
+#app {
+  width: 100%;
+  max-width: 480px;
+  height: 100%;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+header {
+  text-align: center;
+  padding-top: 1rem;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.25rem;
+  background: linear-gradient(to right, #fff, #888);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 400;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.output-container {
+  position: relative;
+  background-color: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 140px;
+}
+
+.output-container:focus-within,
+.output-container.active {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 15px var(--accent-dim);
+}
+
+#output-display {
+  width: 100%;
+  background: transparent;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--accent-color);
+  text-align: center;
+  word-break: break-all;
+  min-height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.privacy-mask {
+  letter-spacing: 4px;
+  font-weight: 800;
+  opacity: 0.7;
+}
+
+.action-buttons {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: all var(--transition-speed);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-btn:hover {
+  background-color: var(--bg-tertiary);
+  color: #fff;
+}
+
+.icon-btn:active {
+  transform: scale(0.95);
+}
+
+/* Buttons */
+.primary-btn {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+  margin-top: 1rem;
+}
+
+.primary-btn:hover {
+  background-color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+}
+
+.primary-btn:active {
+  transform: translateY(0);
+}
+
+/* Security Badge */
+.security-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  color: #4ade80;
+  /* Green Shield */
+  font-size: 0.75rem;
+  opacity: 0.8;
+  text-align: center;
+  user-select: none;
+}
+
+.security-badge span {
+  color: var(--text-secondary);
+}
+
+/* Mobile check */
+@media (max-height: 700px) {
+  #app {
+    padding: 1rem;
+  }
+
+  main {
+    gap: 1.5rem;
+  }
+}
