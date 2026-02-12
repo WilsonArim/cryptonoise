@@ -209,18 +209,30 @@ main {
 footer {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   align-items: center;
-  font-size: 0.75rem;
+  font-size: 1rem;
+  /* Increased from 0.75rem (+33% base, visual +50%) */
   color: var(--text-secondary);
+  padding-bottom: 2rem;
+  /* Add some breathing room at bottom */
 }
 
 .trust-badges {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
-  opacity: 0.8;
+  gap: 1.5rem;
+  /* Increased gap */
+  opacity: 0.9;
+  /* Slightly more visible */
+}
+
+/* Icons in footer should be larger */
+.badge svg,
+.security-note svg {
+  width: 20px;
+  height: 20px;
 }
 
 .badge {
